@@ -1,7 +1,7 @@
+using Logic;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WeDriveRentalUI.Client.Pages;
 using WeDriveRentalUI.Components;
 using WeDriveRentalUI.Components.Account;
 using WeDriveRentalUI.Data;
@@ -29,6 +29,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
+
+builder.Services.AddScoped<IRentalRepo, RentalRepo>();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
